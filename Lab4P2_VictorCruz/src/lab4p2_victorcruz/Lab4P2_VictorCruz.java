@@ -235,37 +235,39 @@ public class Lab4P2_VictorCruz {
                                                                 }//fin del while que valida ingresar corectamente el tipo de marca
                                                                 System.out.println("Ingrese la Descripcion: ");
                                                                 descrip = sc.next();
-                                                                String Nombre, ID, nacionalidad, Username, Password;
-                                                                int a_contrrato1;
-                                                                ArrayList<Directores> directores = new ArrayList();
-                                                                ArrayList<Consultores> consultors = new ArrayList();
-                                                                ArrayList<Consultores> c = new ArrayList();
-                                                                ArrayList<Desarrolladores> developers = new ArrayList();
-                                                                ArrayList<Desarrolladores> d = new ArrayList();
-                                                                int a_puesto, cant_proyectos, cant_desa;
-                                                                for (int i = 0; i < emp.size(); i++) {
-                                                                    if (emp.get(i) instanceof Directores) { //Agregar a Lista los diretores
-                                                                        Nombre = emp.get(i).getNombre();
-                                                                        ID = emp.get(i).getID();
-                                                                        Username = emp.get(i).getUsername();
-                                                                        Password = emp.get(i).getPassword();
-                                                                        nacionalidad = emp.get(i).getNacionalidad();
-                                                                        a_contrrato1 = emp.get(i).getA_contrrato();
-                                                                        a_puesto = ((Directores) emp.get(i)).getA_puesto();
-                                                                        cant_desa = ((Directores) emp.get(i)).getCant_desa();
-                                                                        cant_proyectos = ((Directores) emp.get(i)).getCant_proyectos();
-                                                                        developers = ((Directores) emp.get(i)).getDesa();
-                                                                        consultors = ((Directores) emp.get(i)).getCons();
-                                                                        for (int j = 0; j < consultors.size(); j++) {
-                                                                            c.add(consultors.get(j));
-                                                                        }
-                                                                        for (int j = 0; j < developers.size(); j++) {
-                                                                            d.add(developers.get(j));
-                                                                        }
-                                                                        directores.add(new Directores(a_puesto, cant_proyectos, d, c, cant_desa, Nombre, ID, nacionalidad, Username, Password, a_contrrato1));
-                                                                    }//fin del if
-                                                                }//fin del for
-                                                                pro.add(new Proyectos(Nombre_pro, nombre_empresa, cant_dura, estado, descrip, d, directores, c));
+                                                                int n=0;
+                                                    String Nombre, ID, nacionalidad, Username, Password;
+                                                    int a_contrrato1;
+                                                    ArrayList<Directores>directores=new ArrayList();
+                                                    
+                                                    ArrayList<Consultores>consultores= new ArrayList();
+                                                    
+                                                    ArrayList<Desarrolladores>desarrolladores=new ArrayList();
+                                                    int a_puesto,cant_proyectos,cant_desa;
+                                                    while(n<2){
+                                                        for (int i = 0; i < emp.size(); i++) {
+                                                            if(emp.get(i) instanceof Directores){
+                                                                System.out.println(i+")"+emp.get(i));
+                                                            }
+                                                        }
+                                                        System.out.println("Ingrese el indice del director  que esta en el proyecto: ");
+                                                        int m=sc.nextInt();
+                                                         Nombre = emp.get(m).getNombre();
+                                                        ID = emp.get(m).getID();
+                                                        Username = emp.get(m).getUsername();
+                                                        Password = emp.get(m).getPassword();
+                                                        nacionalidad = emp.get(m).getNacionalidad();
+                                                        a_contrrato1 = emp.get(m).getA_contrrato();
+                                                        a_puesto = ((Directores) emp.get(m)).getA_puesto();
+                                                        cant_desa = ((Directores) emp.get(m)).getCant_desa();
+                                                        cant_proyectos = ((Directores) emp.get(m)).getCant_proyectos();
+                                                        desarrolladores = ((Directores) emp.get(m)).getDesa();
+                                                        consultores = ((Directores) emp.get(m)).getCons();
+                                                        directores.add(new Directores(a_puesto, cant_proyectos, desarrolladores, consultores, cant_desa, Nombre, ID, nacionalidad, Username, Password, a_contrrato1));
+                                                        n++;
+                                                    }
+                                                    
+                                                    pro.add(new Proyectos(Nombre_pro, nombre_empresa, cant_dura, estado, descrip, desarrolladores, directores, consultores));
 
                                                                 validar = false;
 
@@ -582,9 +584,36 @@ public class Lab4P2_VictorCruz {
                                     }//fin del switch principal
                                 }//fin del while principal
                             } else {
-                                //menu no Admin 
-
+                               int opc23=0;
+                        int aux =0;
+                        for (int i = 0; i < emp.size(); i++) {
+                            if(emp.get(i).getUsername().equalsIgnoreCase(username)&&emp.get(i).getPassword().equalsIgnoreCase(password)){
+                                if(emp.get(i) instanceof Desarrolladores){
+                                    opc23=1;
+                                }else if(emp.get(i) instanceof Directores){
+                                    opc23=2;
+                                }else if(emp.get(i) instanceof Consultores){
+                                    opc23=3;
+                                }
+                                aux =i;
                             }
+                            switch(opc23){
+                                case 1:
+                                    
+                                    
+                                break;
+                                case 2:
+                                break;
+                                case 3:
+                                break;
+                            }
+                        }
+                        
+                    
+
+                                
+                                
+                            }//fin del else
                         } else if (opcion2 == 2) {
                             System.out.println("Saliendo del sistema Interno");
                         } else {
