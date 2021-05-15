@@ -98,7 +98,7 @@ public class Empleados implements Sueldo {
 
     @Override
     public double Sueldo() {
-        
+        return this.sueldo=((12000*8)/2)*this.a_contrrato;
     }
     
     

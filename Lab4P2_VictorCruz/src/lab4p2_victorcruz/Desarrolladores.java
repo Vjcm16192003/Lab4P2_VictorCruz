@@ -15,7 +15,7 @@ public class Desarrolladores extends Empleados implements Sueldo {
     private String leng_fav;
     private double Sueldo = 0;
 
-    public Desarrolladores(int a_exp, int hora_trabajo, int cant_pro, int cant_des, String leng_fav, double Sueldo,int a_con, String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
+    public Desarrolladores(int a_exp, int hora_trabajo, int cant_pro, int cant_des, String leng_fav, double Sueldo,String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
         super(Nombre, ID, nacionalidad, Username, Password, a_contrrato);
         this.a_exp = a_exp;
         this.hora_trabajo = hora_trabajo;
@@ -23,7 +23,7 @@ public class Desarrolladores extends Empleados implements Sueldo {
         this.cant_des = cant_des;
         this.leng_fav = leng_fav;
         this.Sueldo = Sueldo;
-        this.a_con = a_con;
+        this.a_con = a_contrrato;
     }
 
     

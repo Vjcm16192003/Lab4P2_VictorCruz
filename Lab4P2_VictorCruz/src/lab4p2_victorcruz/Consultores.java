@@ -14,13 +14,13 @@ public class Consultores extends Empleados implements Sueldo{
     private String campo_Experiencia;
     private double sueldo=0;
 
-    public Consultores(int cant_proyectos, int dura_consult, String campo_Experiencia,int cant_desar,int ano_c, String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
+    public Consultores(int cant_proyectos, int dura_consult, String campo_Experiencia,int cant_desar, String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
         super(Nombre, ID, nacionalidad, Username, Password, a_contrrato);
         this.cant_proyectos = cant_proyectos;
         this.dura_consult = dura_consult;
         this.campo_Experiencia = campo_Experiencia;
         this.cant_desar = cant_desar;
-        this.ano_c = ano_c;
+        this.ano_c = a_contrrato;
     }
 
     public Consultores() {

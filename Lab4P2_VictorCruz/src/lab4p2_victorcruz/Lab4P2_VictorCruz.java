@@ -47,7 +47,7 @@ public class Lab4P2_VictorCruz {
                             if (username.equalsIgnoreCase("Admin") && password.equalsIgnoreCase("1234")) {
                                 int opc2 = 0;
                                 while (opc2 != 6) {
-                                    System.out.println("***Menu***\n"
+                                    System.out.println("---Menu---\n"
                                             + "1. Agregar\n"
                                             + "2. Modificar\n"
                                             + "3. Listar\n"
@@ -60,7 +60,7 @@ public class Lab4P2_VictorCruz {
                                         case 1: {//AGREGAR
                                             int op1 = 0;
                                             while (op1 != 3) {
-                                                System.out.println("***Menu***\n"
+                                                System.out.println("---Menu---\n"
                                                         + "1. Crear Empleado\n"
                                                         + "2. Crear Proyectos\n"
                                                         + "3. Salir\n"
@@ -99,7 +99,7 @@ public class Lab4P2_VictorCruz {
                                                                     type = sc.next();
                                                                 }//fin del while que valida ingresar corectamente el tipo de marca
                                                                 if (type.equalsIgnoreCase("Desarrollador")) {
-                                                                    int a_exp, hora_trabajo, cant_pro, cant_des;
+                                                                    int a_exp, hora_trabajo, cant_pro, cant_des, a_con;
                                                                     String leng_fav;
                                                                     System.out.println("Ingrese sus Años de Experiencia: ");
                                                                     a_exp = sc.nextInt();
@@ -111,9 +111,19 @@ public class Lab4P2_VictorCruz {
                                                                     cant_des = sc.nextInt();
                                                                     System.out.println("Ingrese su Lenguaje de Programacion Favoritos: ");
                                                                     leng_fav = sc.next();
+
                                                                     emp.add(new Desarrolladores(a_exp, hora_trabajo, cant_pro, cant_des, leng_fav, a_exp, Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                        if (((Desarrolladores) emp.get(i)).getSueldo() == 0) {
+                                                                            double s = ((Desarrolladores) emp.get(i)).Sueldo();
+                                                                            ((Desarrolladores) emp.get(i)).setSueldo(s);
+                                                                            emp.get(i).setSueldo(s);
+                                                                        }//fin del if
+                                                                    }//fin del for
 
                                                                 } else if (type.equalsIgnoreCase("Director")) {
+                                                                    ArrayList<Desarrolladores> d = new ArrayList();
+                                                                    ArrayList<Consultores> c = new ArrayList();
                                                                     int a_puesto, cant_proyectos, cant_desa;
                                                                     System.out.println("Ingrese los Años en el puesto: ");
                                                                     a_puesto = sc.nextInt();
@@ -121,6 +131,50 @@ public class Lab4P2_VictorCruz {
                                                                     cant_proyectos = sc.nextInt();
                                                                     System.out.println("Ingrese la Cantidad de Proyectos Desarrollados: ");
                                                                     cant_desa = sc.nextInt();
+
+                                                                    int auxiliar = 0;
+                                                                    int cant_proyectos1, cant_desar1, dura_consult1;
+                                                                    String campo_Experiencia;
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                             if(emp.get(i) instanceof Consultores){
+                                                                                 System.out.println(i+")"+emp.get(i));
+                                                                             }//fin del if
+                                                                        }//fin del for
+                                                                    System.out.println("Ingrese el indice de los consultores que estan listados con este Director: ");
+                                                                    int posi=sc.nextInt();
+                                                                    cant_proyectos1 = ((Consultores) emp.get(posi)).getCant_proyectos();
+                                                                            cant_desar1 = ((Consultores) emp.get(posi)).getCant_desar();
+                                                                            dura_consult1 = ((Consultores) emp.get(posi)).getDura_consult();
+                                                                            campo_Experiencia = ((Consultores) emp.get(posi)).getCampo_Experiencia();
+
+                                                                            c.add(new Consultores(cant_proyectos1, dura_consult1, campo_Experiencia, cant_desar1, Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                            auxiliar++;
+                                                                    auxiliar = 0;
+                                                                    int a_exp1, hora_trabajo1, cant_pro1, cant_des1;
+                                                                    String leng_fav1;
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                             if(emp.get(i) instanceof Desarrolladores){
+                                                                                 System.out.println(i+")"+emp.get(i));
+                                                                             }//fin del if
+                                                                        }//fin del for
+                                                                    
+                                                                    System.out.println("Ingrese el indice de los Desarrolladores que estan listados con este Director: ");
+                                                                    int posi1=sc.nextInt();
+                                                                    cant_pro1 = ((Desarrolladores) emp.get(posi1)).getCant_pro();
+                                                                            cant_des1 = ((Desarrolladores) emp.get(posi1)).getCant_des();
+                                                                            a_exp1 = ((Desarrolladores) emp.get(posi1)).getA_exp();
+                                                                            hora_trabajo1 = ((Desarrolladores) emp.get(posi1)).getHora_trabajo();
+                                                                            leng_fav1 = ((Desarrolladores) emp.get(posi1)).getLeng_fav();
+                                                                            d.add(new Desarrolladores(a_exp1, hora_trabajo1, cant_pro1, cant_des1, leng_fav1, a_exp1, Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                            auxiliar++;
+                                                                    emp.add(new Directores(a_puesto, cant_proyectos, d, c, cant_desa, Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                        if (((Directores) emp.get(i)).getSueldo() == 0) {
+                                                                            double s = ((Directores) emp.get(i)).Sueldo();
+                                                                            ((Directores) emp.get(i)).setSueldo(s);
+                                                                            emp.get(i).setSueldo(s);
+                                                                        }//fin del if
+                                                                    }//fin del for
 
                                                                 } else if (type.equalsIgnoreCase("Consultor")) {
                                                                     int cant_proyectos, cant_desar, dura_consult;
@@ -133,9 +187,24 @@ public class Lab4P2_VictorCruz {
                                                                     dura_consult = sc.nextInt();
                                                                     System.out.println("Ingrese su Campo de Experiencia: ");
                                                                     campo_Experiencia = sc.next();
+
                                                                     emp.add(new Consultores(cant_proyectos, dura_consult, campo_Experiencia, cant_desar, Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                        if (((Consultores) emp.get(i)).getSueldo() == 0) {
+                                                                            double s = ((Consultores) emp.get(i)).Sueldo();
+                                                                            ((Consultores) emp.get(i)).setSueldo(s);
+                                                                            emp.get(i).setSueldo(s);
+                                                                        }//fin del if
+                                                                    }//fin del for
+
                                                                 } else if (type.equalsIgnoreCase("Normal")) {
                                                                     emp.add(new Empleados(Nombre, ID, nacionalidad, Username, Password, a_contrrato));
+                                                                    for (int i = 0; i < emp.size(); i++) {
+                                                                        if (emp.get(i).getSueldo() == 0) {
+                                                                            double s = emp.get(i).Sueldo();
+                                                                            emp.get(i).setSueldo(s);
+                                                                        }
+                                                                    }
                                                                 }//fin de las Condiciones
 
                                                                 validar = false;
@@ -150,19 +219,53 @@ public class Lab4P2_VictorCruz {
                                                         boolean validar = true;
                                                         while (validar = true) {
                                                             try {
-                                                                String Nombre_pro, nombre_empresa, cant_dura, estado;
+                                                                String Nombre_pro, nombre_empresa, estado,descrip;
+                                                                int cant_dura;
                                                                 System.out.println("Ingrese el Nombre del Proyecto: ");
                                                                 Nombre_pro = sc.next();
                                                                 System.out.println("Ingrese el nombre de la Empresa: ");
                                                                 nombre_empresa = sc.next();
                                                                 System.out.println("Ingrese la Duracion del Proyecto: ");
-                                                                cant_dura = sc.next();
+                                                                cant_dura = sc.nextInt();
                                                                 System.out.println("Ingrese el estado del Proyecto(Iniciado/Desarrollado/Terminado)");
                                                                 estado = sc.next();
                                                                 while (!estado.equalsIgnoreCase("Iniciado") && !estado.equalsIgnoreCase("Desarrollado") && !estado.equalsIgnoreCase("Terminado")) {
                                                                     System.out.println("Ingrese el estado del Proyecto(Iniciado/Desarrollado/Terminado)");;
                                                                     estado = sc.next();
                                                                 }//fin del while que valida ingresar corectamente el tipo de marca
+                                                                System.out.println("Ingrese la Descripcion: ");
+                                                                descrip = sc.next();
+                                                                String Nombre, ID, nacionalidad, Username, Password;
+                                                                int a_contrrato1;
+                                                                ArrayList<Directores> directores = new ArrayList();
+                                                                ArrayList<Consultores> consultors = new ArrayList();
+                                                                ArrayList<Consultores> c = new ArrayList();
+                                                                ArrayList<Desarrolladores> developers = new ArrayList();
+                                                                ArrayList<Desarrolladores> d = new ArrayList();
+                                                                int a_puesto, cant_proyectos, cant_desa;
+                                                                for (int i = 0; i < emp.size(); i++) {
+                                                                    if (emp.get(i) instanceof Directores) { //Agregar a Lista los diretores
+                                                                        Nombre = emp.get(i).getNombre();
+                                                                        ID = emp.get(i).getID();
+                                                                        Username = emp.get(i).getUsername();
+                                                                        Password = emp.get(i).getPassword();
+                                                                        nacionalidad = emp.get(i).getNacionalidad();
+                                                                        a_contrrato1 = emp.get(i).getA_contrrato();
+                                                                        a_puesto = ((Directores) emp.get(i)).getA_puesto();
+                                                                        cant_desa = ((Directores) emp.get(i)).getCant_desa();
+                                                                        cant_proyectos = ((Directores) emp.get(i)).getCant_proyectos();
+                                                                        developers = ((Directores) emp.get(i)).getDesa();
+                                                                        consultors = ((Directores) emp.get(i)).getCons();
+                                                                        for (int j = 0; j < consultors.size(); j++) {
+                                                                            c.add(consultors.get(j));
+                                                                        }
+                                                                        for (int j = 0; j < developers.size(); j++) {
+                                                                            d.add(developers.get(j));
+                                                                        }
+                                                                        directores.add(new Directores(a_puesto, cant_proyectos, d, c, cant_desa, Nombre, ID, nacionalidad, Username, Password, a_contrrato1));
+                                                                    }//fin del if
+                                                                }//fin del for
+                                                                pro.add(new Proyectos(Nombre_pro, nombre_empresa, cant_dura, estado, descrip, d, directores, c));
 
                                                                 validar = false;
 
@@ -181,7 +284,7 @@ public class Lab4P2_VictorCruz {
                                         case 2: {//MODIFICAR
                                             int op1 = 0;
                                             while (op1 != 3) {
-                                                System.out.println("***MENU***\n"
+                                                System.out.println("---MENU---\n"
                                                         + "1. Modificar Empleado\n"
                                                         + "2. Modificar Proyecto\n"
                                                         + "3. Salir\n"
@@ -204,7 +307,7 @@ public class Lab4P2_VictorCruz {
                                                                     int opc1 = 0;
                                                                     String Nombre, ID, nacionalidad, Username, Password;
                                                                     int a_contrrato;
-                                                                    while (opc1 != 9) {
+                                                                    while (opc1 != 8) {
                                                                         System.out.println("1-Nombre\n"
                                                                                 + "2-ID \n"
                                                                                 + "3-Nacionalidad\n"
@@ -218,22 +321,26 @@ public class Lab4P2_VictorCruz {
                                                                             case 1: {
                                                                                 System.out.println("Ingrese el Nombre del Empleado: ");
                                                                                 Nombre = sc.next();
+                                                                                emp.get(pos).setNombre(Nombre);
                                                                                 break;
                                                                             }//fin del case
 
                                                                             case 2: {
                                                                                 System.out.println("Ingrese el ID del Empleado: ");
                                                                                 ID = sc.next();
+                                                                                emp.get(pos).setID(ID);
                                                                                 break;
                                                                             }//fin del case
                                                                             case 3: {
                                                                                 System.out.println("Ingrese la Nacionalidad: ");
                                                                                 nacionalidad = sc.next();
+                                                                                emp.get(pos).setNacionalidad(nacionalidad);
                                                                                 break;
                                                                             }//fin del case
                                                                             case 4: {
                                                                                 System.out.println("Años de Contrato: ");
                                                                                 a_contrrato = sc.nextInt();
+                                                                                emp.get(pos).setA_contrrato(a_contrrato);
 
                                                                                 break;
                                                                             }//fin del case
@@ -242,12 +349,16 @@ public class Lab4P2_VictorCruz {
                                                                                 String campo_Experiencia;
                                                                                 System.out.println("Ingrese la Cantidad de Proyectos Asignados: ");
                                                                                 cant_proyectos = sc.nextInt();
+                                                                                ((Consultores) emp.get(pos)).setCant_proyectos(cant_proyectos);
                                                                                 System.out.println("Ingrese la Cantidad de Proyectos Desarrollados: ");
                                                                                 cant_desar = sc.nextInt();
+                                                                                ((Consultores) emp.get(pos)).setCant_desar(cant_desar);
                                                                                 System.out.println("Ingrese la Duracion de la Consulta: ");
                                                                                 dura_consult = sc.nextInt();
+                                                                                ((Consultores) emp.get(pos)).setDura_consult(dura_consult);
                                                                                 System.out.println("Ingrese su Campo de Experiencia: ");
                                                                                 campo_Experiencia = sc.next();
+                                                                                ((Consultores) emp.get(pos)).setCampo_Experiencia(campo_Experiencia);
 
                                                                                 break;
                                                                             }//fin del case
@@ -255,10 +366,13 @@ public class Lab4P2_VictorCruz {
                                                                                 int a_puesto, cant_proyectos, cant_desa;
                                                                                 System.out.println("Ingrese los Años en el puesto: ");
                                                                                 a_puesto = sc.nextInt();
+                                                                                ((Directores) emp.get(pos)).setA_puesto(a_puesto);
                                                                                 System.out.println("Ingrese la Cantidad de proyectos Asignados: ");
                                                                                 cant_proyectos = sc.nextInt();
+                                                                                ((Directores) emp.get(pos)).setCant_proyectos(cant_proyectos);
                                                                                 System.out.println("Ingrese la Cantidad de Proyectos Desarrollados: ");
                                                                                 cant_desa = sc.nextInt();
+                                                                                ((Directores) emp.get(pos)).setCant_desa(cant_desa);
                                                                                 break;
                                                                             }//fin del case
                                                                             case 7: {
@@ -266,14 +380,19 @@ public class Lab4P2_VictorCruz {
                                                                                 String leng_fav;
                                                                                 System.out.println("Ingrese sus Años de Experiencia: ");
                                                                                 a_exp = sc.nextInt();
+                                                                                ((Desarrolladores) emp.get(pos)).setA_exp(a_exp);
                                                                                 System.out.println("Ingrese sus Horas de Trabajo: ");
                                                                                 hora_trabajo = sc.nextInt();
+                                                                                ((Desarrolladores) emp.get(pos)).setHora_trabajo(hora_trabajo);
                                                                                 System.out.println("Ingrese la Cantidad de proyectos Asignados: ");
                                                                                 cant_pro = sc.nextInt();
+                                                                                ((Desarrolladores) emp.get(pos)).setCant_pro(cant_pro);
                                                                                 System.out.println("Ingrese la Cantidad de Proyectos Desarrollados: ");
                                                                                 cant_des = sc.nextInt();
+                                                                                ((Desarrolladores) emp.get(pos)).setCant_des(cant_des);
                                                                                 System.out.println("Ingrese su Lenguaje de Programacion Favoritos: ");
                                                                                 leng_fav = sc.next();
+                                                                                ((Desarrolladores) emp.get(pos)).setLeng_fav(leng_fav);
                                                                                 break;
                                                                             }//fin del case
 
@@ -294,6 +413,64 @@ public class Lab4P2_VictorCruz {
                                                         boolean validar = true;
                                                         while (validar = true) {
                                                             try {
+                                                                if (pro.isEmpty()) {
+                                                                    System.out.println("No hay Proyectos para modificar");
+                                                                } else {
+                                                                    System.out.println("Ingrese posicion para modificar un Proyecto");
+                                                                    for (int i = 0; i < pro.size(); i++) { //Imprime solo el numero de Serie
+                                                                        System.out.println("En la posicion " + i + ") " + ", está: " + pro.get(i).getNombre_pro());
+                                                                    }//fin del for
+                                                                    System.out.print("Ingrese poscion: ");
+                                                                    int pos2 = sc.nextInt();
+                                                                    int opc1 = 0;
+                                                                    String Nombre_pro, nombre_empresa,estado;
+                                                                    int cant_dura;
+                                                                    while (opc1 != 7) {
+                                                                        System.out.println("1-Nombre del Proyecto\n"
+                                                                                + "2-Nombre de la Empresa \n"
+                                                                                + "3-Duracion del Proyecto\n"
+                                                                                + "4-Estado\n"
+                                                                                + "5. Descripcion\n"
+                                                                                + "6. Salir");
+                                                                        opc1 = sc.nextInt();
+                                                                        switch (opc1) {
+                                                                            case 1: {
+
+                                                                                System.out.println("Ingrese el Nombre del Proyecto: ");
+                                                                                Nombre_pro = sc.next();
+                                                                                pro.get(pos2).setNombre_pro(Nombre_pro);
+                                                                                break;
+                                                                            }//fin del case
+
+                                                                            case 2: {
+                                                                                System.out.println("Ingrese el nombre de la Empresa: ");
+                                                                                nombre_empresa = sc.next();
+                                                                                pro.get(pos2).setNombre_empresa(nombre_empresa);
+                                                                                break;
+                                                                            }//fin del case
+
+                                                                            case 3: {
+                                                                                System.out.println("Ingrese la Duracion del Proyecto: ");
+                                                                                cant_dura = sc.nextInt();
+                                                                                pro.get(pos2).setCant_dura(cant_dura);
+                                                                                break;
+                                                                            }//fin del case
+
+                                                                            case 4: {
+                                                                                System.out.println("Ingrese el estado del Proyecto(Iniciado/Desarrollado/Terminado)");
+                                                                                estado = sc.next();
+                                                                                pro.get(pos2).setEstado(estado);
+                                                                                while (!estado.equalsIgnoreCase("Iniciado") && !estado.equalsIgnoreCase("Desarrollado") && !estado.equalsIgnoreCase("Terminado")) {
+                                                                                    System.out.println("Ingrese el estado del Proyecto(Iniciado/Desarrollado/Terminado)");;
+                                                                                    estado = sc.next();
+                                                                                    pro.get(pos2).setEstado(estado);
+                                                                                }//fin del while que valida ingresar corectamente el tipo de marca
+                                                                                break;
+                                                                            }//fin del case
+
+                                                                        }//fin del switch
+                                                                    }//fin del while
+                                                                }//fin de la condicion 
 
                                                                 validar = false;
 
@@ -312,7 +489,7 @@ public class Lab4P2_VictorCruz {
                                         case 3: {//LISTAR
                                             int op1 = 0;
                                             while (op1 != 3) {
-                                                System.out.println("***MENU***\n"
+                                                System.out.println("---MENU---\n"
                                                         + "1. Listar Empleados\n"
                                                         + "2. Listar Proyectos\n"
                                                         + "3. Salir\n"
@@ -353,7 +530,7 @@ public class Lab4P2_VictorCruz {
                                         case 4: {//ELIMINAR
                                             int op1 = 0;
                                             while (op1 != 3) {
-                                                System.out.println("***MENU***\n"
+                                                System.out.println("---MENU---\n"
                                                         + "1. Eliminar Empleado\n"
                                                         + "2. Eliminar Proyecto\n"
                                                         + "3. Salir\n"
@@ -399,11 +576,6 @@ public class Lab4P2_VictorCruz {
 
                                             break;
                                         }//fin del case 4
-
-                                        case 5: {//Simulacion
-
-                                            break;
-                                        }//fin del case 5
 
                                         default:
 

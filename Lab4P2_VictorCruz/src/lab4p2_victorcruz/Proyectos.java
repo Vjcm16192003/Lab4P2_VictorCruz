@@ -12,21 +12,30 @@ import java.util.ArrayList;
  * @author Victor Jafet Cruz
  */
 public class Proyectos {
-    private String Nombre_pro,nombre_empresa,cant_dura,estado;
+    private String Nombre_pro,nombre_empresa,estado,descrip;
+    private int cant_dura;
     ArrayList<Desarrolladores> des = new ArrayList();
     ArrayList<Directores> dir = new ArrayList();
     ArrayList<Consultores> cons = new ArrayList();
 
-    public Proyectos(String Nombre_pro, String nombre_empresa, String cant_dura, String estado,ArrayList des,ArrayList dir,ArrayList cons) {
+    public Proyectos(String Nombre_pro, String nombre_empresa, int cant_dura, String estado,String descrip,ArrayList des,ArrayList dir,ArrayList cons) {
         this.Nombre_pro = Nombre_pro;
         this.nombre_empresa = nombre_empresa;
         this.cant_dura = cant_dura;
         this.estado = estado;
+        this.descrip = descrip;
         this.des = des;
         this.dir = dir;
         this.cons = cons;
+    
         
     }
+
+    public Proyectos() {
+    }
+    
+    
+    
 
     public String getNombre_pro() {
         return Nombre_pro;
@@ -44,11 +53,11 @@ public class Proyectos {
         this.nombre_empresa = nombre_empresa;
     }
 
-    public String getCant_dura() {
+    public int getCant_dura() {
         return cant_dura;
     }
 
-    public void setCant_dura(String cant_dura) {
+    public void setCant_dura(int cant_dura) {
         this.cant_dura = cant_dura;
     }
 
@@ -96,13 +105,24 @@ public class Proyectos {
         }
     }
 
+    public String getDescrip() {
+        return descrip;
+    }
+
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
+    }
+    
+    
+
     @Override
     public String toString() {
         return "Proyectos\n" 
                 + "\nNombre del Proyecto: " + Nombre_pro 
                 + "\nNombre de la Empresa: " + nombre_empresa 
                 + "\nDuracion del Proyecto: " + cant_dura 
-                + "\nEstado Actual: " + estado 
+                + "\nEstado Actual: " + estado
+                + "\nDescripcion: " + descrip
                 + "\nDesarrolladores en el Proyecto: " + des 
                 + "\nDirectores en el Proyecto: " + dir 
                 + "\nConsultores en el Proyecto: " + cons;

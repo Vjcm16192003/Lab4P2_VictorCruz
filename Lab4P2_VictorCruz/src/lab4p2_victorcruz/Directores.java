@@ -17,14 +17,14 @@ public class Directores extends Empleados implements Sueldo{
     ArrayList<Consultores> cons =new ArrayList();
     private double sueldos=0;
 
-    public Directores(int a_puesto, int cant_proyectos,ArrayList desa,ArrayList cons, int cant_desa,int a_con, String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
+    public Directores(int a_puesto, int cant_proyectos,ArrayList desa,ArrayList cons, int cant_desa, String Nombre, String ID, String nacionalidad, String Username, String Password, int a_contrrato) {
         super(Nombre, ID, nacionalidad, Username, Password, a_contrrato);
         this.a_puesto = a_puesto;
         this.cant_proyectos = cant_proyectos;
         this.desa = desa;
         this.cons = cons;
         this.cant_desa = cant_desa; 
-        this.a_con = a_con;
+        this.a_con = a_contrrato;
     }
 
     public Directores() {
